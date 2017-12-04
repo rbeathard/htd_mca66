@@ -1,17 +1,14 @@
 # htd_mca66
-Serial to MQTT gateway for mca66 whole-house audio system from Home Theater Direct.
+Serial to MQTT gateway for mca66 whole-house audio system from Home Theater Direct (http://htd.com)
 
 
-
-I started this project because I had issue with the GW-SL1 serial-ethernet gateway occasionally locking up. I also leveraged the development to learn MQTT and Home Assistant. Originally developed in node.js but quickly switched to golang because it was easier to maintain the dependencies on both developmental machine (Mac laptop) and target machine (Raspberry PI).
+I started this project because I had issue with the GW-SL1 serial-ethernet gateway occasionally locking up. I also leveraged the development to learn MQTT and Home Assistant. Originally developed in node.js but quickly switched to golang because it was easier to maintain the dependencies between development (Mac laptop) and target (Raspberry PI) machines. Nothing beats scp'ing an executable.
 
 The serial interface to the MCA-66 audio system is a bit orientated protocol which made it challenging in parsing. I have included the two HTD documentation that describes the protocol.
 
-The program is broken into two packages:
-* htd
-* htdserial
-
-All the serial functionality is contained in the htdserial package and the main program logic is contained in the htd package. The htd package contains the MQTT logic for interworking between serial and MQTT. This organization should allow for easier introduction of a different north bound protocol besides MQTT.
+The program is broken into two components:
+* htd - main program, MQTT handling
+* htdserial - main package used to handle serial communication with MCA-66
 
 Project utilizes two external packages:
   * github.com/eclipse/paho.mqtt.golang - mqtt library
